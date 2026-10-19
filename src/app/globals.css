@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #F4F1E8;
+  --surface: #FBFAF5;
+  --ink: #1B1A17;
+  --ink-muted: #6A655A;
+  --line: #D8D3C5;
+  --line-dashed: #B9B3A2;
+  --tag: #F2B705;
+  --success: #2F7D4F;
+  --warning: #A8520B;
+  --danger: #B8321F;
+
+  --cat-minuman: #2B7A78;
+  --cat-makanan: #C4622D;
+  --cat-rumah: #7A7F2A;
+  --cat-perawatan: #7B4B6A;
+  --cat-aksesori: #4A5A73;
+}
+
+@theme {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-line-dashed: var(--line-dashed);
+  --color-tag: var(--tag);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  --color-cat-minuman: var(--cat-minuman);
+  --color-cat-makanan: var(--cat-makanan);
+  --color-cat-rumah: var(--cat-rumah);
+  --color-cat-perawatan: var(--cat-perawatan);
+  --color-cat-aksesori: var(--cat-aksesori);
+
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Base resets & typography */
+html, body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tabular numbers for all monetary and numerical values */
+.tabular-nums, .font-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hairline dividers */
+.border-line {
+  border-color: var(--line);
+}
+
+.border-line-dashed {
+  border-color: var(--line-dashed);
+  border-style: dashed;
+}
+
+/* Receipt serrated zigzag edges */
+.receipt-edge-top {
+  position: relative;
+}
+.receipt-edge-top::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-image: radial-gradient(circle at 50% 100%, transparent 4px, var(--surface) 4px);
+  background-size: 10px 6px;
+  background-repeat: repeat-x;
+}
+
+.receipt-edge-bottom {
+  position: relative;
+}
+.receipt-edge-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background-image: radial-gradient(circle at 50% 0%, transparent 4px, var(--surface) 4px);
+  background-size: 10px 6px;
+  background-repeat: repeat-x;
+}
+
+/* Stamp styles */
+.stamp-lunas {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--success);
+  color: var(--success);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transform: rotate(-6deg);
+  opacity: 0.9;
+  padding: 4px 12px;
+  border-radius: 2px;
+  animation: stamp-pop 160ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stamp-batal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--danger);
+  color: var(--danger);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transform: rotate(-6deg);
+  opacity: 0.9;
+  padding: 4px 12px;
+  border-radius: 2px;
+  animation: stamp-pop 160ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes stamp-pop {
+  0% {
+    transform: scale(1.18) rotate(-6deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1) rotate(-6deg);
+    opacity: 0.9;
+  }
+}
+
+/* Highlight flash animation for adding to cart */
+@keyframes tag-highlight {
+  0% {
+    background-color: var(--tag);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-tag-highlight {
+  animation: tag-highlight 600ms ease-out;
+}
+
+/* Accessible focus ring */
+*:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
